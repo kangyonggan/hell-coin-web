@@ -133,8 +133,8 @@ export default {
       second: 60,
       params: {
         loginType: 'BY_PWD',
-        email: '',
-        loginPwd: '',
+        email: 'java@kangyonggan.com',
+        loginPwd: 'd53810dd679d4a69',
         verifyCode: '',
         agree: true
       },

@@ -17,20 +17,20 @@
           class="profile"
           @command="handleCommand"
         >
-          <span class="el-dropdown-link">
+          <span
+            class="el-dropdown-link"
+            style="margin-left: 20px;color: #d5d5d5;cursor: pointer;height: 60px;line-height: 60px;display: inline-block"
+          >
             {{ $store.getters.getUserInfo.nickName }}
             <i class="el-icon-arrow-down el-icon--right" />
           </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
-                command="/profile"
+                command="/preference"
                 style="line-height: normal"
               >
-                {{ $store.getters.getUserInfo.nickName }}
-                <div style="font-size: 8px;line-height: normal">
-                  {{ $store.getters.getUserInfo.loginName }}
-                </div>
+                偏好设置
               </el-dropdown-item>
               <el-dropdown-item
                 divided
