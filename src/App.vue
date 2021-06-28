@@ -39,4 +39,8 @@ body {
   color: $--color-primary !important;
 }
 
+.el-loading-mask {
+  background: none !important;
+}
+
 </style>

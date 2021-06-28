@@ -8,35 +8,21 @@
       >
     </router-link>
 
-    <ul class="nav-list">
-      <li
-        v-for="nav in navList"
-        :key="nav.code"
-      >
-        <router-link
-          :to="nav.code"
-          :class="isActive(nav.code) ? 'active ' : ''"
-        >
-          {{ nav.value }}
-        </router-link>
-      </li>
-    </ul>
-
     <ul
       class="nav-user"
     >
       <li>
         <router-link
-          to="/user/register"
-          :class="isActive('/user/register') ? 'active ' : ''"
+          to="/register"
+          :class="isActive('/register') ? 'active ' : ''"
         >
           注册
         </router-link>
       </li>
       <li>
         <router-link
-          to="/user/login"
-          :class="isActive('/user/login') ? 'active ' : ''"
+          to="/login"
+          :class="isActive('/login') ? 'active ' : ''"
         >
           登录
         </router-link>
@@ -49,15 +35,7 @@
 export default {
   data() {
     return {
-      currentUrl: '/',
-      navList: [
-        {
-          code: '/contract',
-          value: '合约'
-        }, {
-          code: '/wallet',
-          value: '钱包'
-        }]
+      currentUrl: '/'
     }
   },
   methods: {
@@ -74,9 +52,8 @@ export default {
         type: 'warning'
       }).then(() => {
         this.axios.post('user/logout').finally(() => {
-          this.$store.commit('setLoginData', {})
           this.$router.push({
-            path: '/user/login'
+            path: '/login'
           })
         })
       })
@@ -104,7 +81,6 @@ export default {
 $--color-primary: #D8BE33;
 
 .navbar {
-  min-width: 600px;
   height: 60px;
   line-height: 60px;
   background: #1d2635;
@@ -115,35 +91,6 @@ $--color-primary: #D8BE33;
     height: 50px;
     margin-left: 50px;
     margin-top: 8px;
-  }
-
-  .nav-list {
-    float: left;
-    list-style: none;
-    margin: 0 0 0 40px;
-    padding: 0;
-
-    li {
-      float: left;
-      height: 60px;
-      line-height: 60px;
-      text-align: center;
-
-      a {
-        display: block;
-        width: 70px;
-        text-decoration: none;
-        color: #828ea1;
-      }
-
-      a.active {
-        color: $--color-primary;
-      }
-
-      a:hover {
-        color: $--color-primary;
-      }
-    }
   }
 
   .nav-user {

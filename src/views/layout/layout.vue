@@ -2,13 +2,11 @@
   <div style="height: 100%">
     <div class="wrapper">
       <navbar />
-      <div class="main">
-        <router-view v-slot="{ Component }">
-          <keep-alive>
-            <component :is="Component" />
-          </keep-alive>
-        </router-view>
-      </div>
+      <router-view v-slot="{ Component }">
+        <keep-alive>
+          <component :is="Component" />
+        </keep-alive>
+      </router-view>
       <div style="height: 60px" />
     </div>
     <Footer />
@@ -28,10 +26,5 @@ export default {
 .wrapper {
   min-height: 100%;
   margin-bottom: -61px;
-}
-
-.main {
-  width: 1240px;
-  margin: 0 auto;
 }
 </style>

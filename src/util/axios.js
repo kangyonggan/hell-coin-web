@@ -21,7 +21,7 @@ axios.interceptors.response.use(function (response) {
       return response.data.data
     } else {
       return Promise.reject({
-        message: response.data.message,
+        msg: response.data.msg,
         code: response.data.code
       })
     }
