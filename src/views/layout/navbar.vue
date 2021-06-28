@@ -30,13 +30,13 @@
                 command="/preference"
                 style="line-height: normal"
               >
-                偏好设置
+                {{ $t("navbar.settings") }}
               </el-dropdown-item>
               <el-dropdown-item
                 divided
                 command="logout"
               >
-                退出
+                {{ $t("navbar.logout") }}
               </el-dropdown-item>
             </el-dropdown-menu>
           </template>
@@ -53,7 +53,7 @@
           to="/register"
           :class="isActive('/register') ? 'active ' : ''"
         >
-          注册
+          {{ $t("navbar.register") }}
         </router-link>
       </li>
       <li>
@@ -61,7 +61,7 @@
           to="/login"
           :class="isActive('/login') ? 'active ' : ''"
         >
-          登录
+          {{ $t("navbar.login") }}
         </router-link>
       </li>
     </ul>
@@ -83,9 +83,9 @@ export default {
       return this.currentUrl.startsWith(url);
     },
     logout() {
-      this.$confirm('此操作将退出登录, 是否继续?', '提示', {
-        confirmButtonText: '确定',
-        cancelButtonText: '取消',
+      this.$confirm(this.$i18n.t('navbar.logoutTip'), this.$i18n.t('common.tips'), {
+        confirmButtonText: this.$i18n.t('common.ok'),
+        cancelButtonText: this.$i18n.t('common.cancel'),
         type: 'warning'
       }).then(() => {
         this.axios.get('/v1/user/logout').finally(() => {
@@ -105,11 +105,11 @@ export default {
     }
   },
   mounted() {
-    this.currentUrl = this.$route.path;
+    this.currentUrl = this.$route.path
   },
   watch: {
     '$route'(newRoute) {
-      this.currentUrl = newRoute.path;
+      this.currentUrl = newRoute.path
     }
   }
 }

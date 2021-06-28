@@ -10,8 +10,9 @@ import VueAxios from 'vue-axios'
 import common from '@/util/common'
 import NumberUtil from '@/util/number-util'
 import DateTimeUtil from '@/util/date-time-util'
+import VueI18n from './language'
 
-let app = createApp(App).use(store).use(router).use(ElementPlus).use(VueAxios, axios)
+let app = createApp(App).use(store).use(router).use(ElementPlus).use(VueAxios, axios).use(VueI18n)
 app.mount('#app')
 
 app.config.globalProperties.$success = common.success
