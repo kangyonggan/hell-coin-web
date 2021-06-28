@@ -7,8 +7,45 @@
         alt="LOGO"
       >
     </router-link>
+    <ul
+      class="nav-user"
+      v-if="$store.getters.getUserInfo.uid"
+    >
+      <li>
+        <el-dropdown
+          trigger="click"
+          class="profile"
+          @command="handleCommand"
+        >
+          <span class="el-dropdown-link">
+            {{ $store.getters.getUserInfo.nickName }}
+            <i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                command="/profile"
+                style="line-height: normal"
+              >
+                {{ $store.getters.getUserInfo.nickName }}
+                <div style="font-size: 8px;line-height: normal">
+                  {{ $store.getters.getUserInfo.loginName }}
+                </div>
+              </el-dropdown-item>
+              <el-dropdown-item
+                divided
+                command="logout"
+              >
+                退出
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </li>
+    </ul>
 
     <ul
+      v-else
       class="nav-user"
     >
       <li>
@@ -51,7 +88,8 @@ export default {
         cancelButtonText: '取消',
         type: 'warning'
       }).then(() => {
-        this.axios.post('user/logout').finally(() => {
+        this.axios.get('/v1/user/logout').finally(() => {
+          this.$store.commit('setUserInfo', {})
           this.$router.push({
             path: '/login'
           })

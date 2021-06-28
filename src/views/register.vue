@@ -1,81 +1,101 @@
 <template>
-  <div class="register-container">
-    <div class="empty-content" />
-    <el-card v-loading="loading">
-      <template #header>
-        <a
-          class="register-type"
-        >
-          用户注册
-        </a>
-      </template>
-      <el-form
-        ref="form"
-        :model="params"
-        :rules="rules"
-      >
-        <el-form-item
-          prop="email"
-        >
-          <el-input
-            placeholder="请输入您的邮箱"
-            v-model="params.email"
-            @keyup.enter.native="submit"
-            autocomplete="off"
+  <el-row>
+    <el-col
+      :xl="17"
+      :lg="16"
+      :md="0"
+      :sm="0"
+      :xs="0"
+    >
+      <div class="login-bg">
+        HELL COIN
+      </div>
+    </el-col>
+    <el-col
+      :xl="5"
+      :lg="6"
+      :md="24"
+      :sm="24"
+      :xs="24"
+    >
+      <div class="register-container">
+        <el-card v-loading="loading">
+          <template #header>
+            <a
+              class="register-type"
+            >
+              用户注册
+            </a>
+          </template>
+          <el-form
+            ref="form"
+            :model="params"
+            :rules="rules"
           >
-            <template #prepend>
-              <i class="el-icon-message" />
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-form-item
-          class="form-item"
-          prop="verifyCode"
-        >
-          <el-input
-            placeholder="请输入邮箱验证码"
-            v-model="params.verifyCode"
-            @keyup.enter.native="submit"
-            autocomplete="off"
-          >
-            <template #prepend>
-              <i class="el-icon-circle-check" />
-            </template>
-            <template #append>
-              <a
-                @click="sendCode"
+            <el-form-item
+              prop="email"
+            >
+              <el-input
+                placeholder="请输入您的邮箱"
+                v-model="params.email"
+                @keyup.enter.native="submit"
+                autocomplete="off"
               >
-                {{ codeText }}
-              </a>
-            </template>
-          </el-input>
-        </el-form-item>
-        <el-button
-          type="primary"
-          size="medium"
-          @click="submit"
-        >
-          注 册
-        </el-button>
-        <div class="bottom-info">
-          <el-form-item
-            prop="agree"
-            class="agree-item"
-          >
-            <el-checkbox v-model="params.agree" />
-          </el-form-item>
-          我同意
-          <router-link to="/page/provisions">
-            《会员条款》
-          </router-link>
-          和
-          <router-link to="/page/privacy">
-            《隐私政策》
-          </router-link>
-        </div>
-      </el-form>
-    </el-card>
-  </div>
+                <template #prepend>
+                  <i class="el-icon-message" />
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-form-item
+              class="form-item"
+              prop="verifyCode"
+            >
+              <el-input
+                placeholder="请输入邮箱验证码"
+                v-model="params.verifyCode"
+                @keyup.enter.native="submit"
+                autocomplete="off"
+              >
+                <template #prepend>
+                  <i class="el-icon-circle-check" />
+                </template>
+                <template #append>
+                  <a
+                    @click="sendCode"
+                  >
+                    {{ codeText }}
+                  </a>
+                </template>
+              </el-input>
+            </el-form-item>
+            <el-button
+              type="primary"
+              size="medium"
+              @click="submit"
+            >
+              注 册
+            </el-button>
+            <div class="bottom-info">
+              <el-form-item
+                prop="agree"
+                class="agree-item"
+              >
+                <el-checkbox v-model="params.agree" />
+              </el-form-item>
+              我同意
+              <router-link to="/page/provisions">
+                《会员条款》
+              </router-link>
+              和
+              <router-link to="/page/privacy">
+                《隐私政策》
+              </router-link>
+            </div>
+          </el-form>
+        </el-card>
+      </div>
+    </el-col>
+  </el-row>
 </template>
 
 <script>
@@ -86,7 +106,7 @@ export default {
       params: {
         email: 'java@kangyonggan.com',
         verifyCode: '',
-        agree: false
+        agree: true
       },
       codeText: '获取验证码',
       second: 60,
@@ -116,7 +136,6 @@ export default {
         that.loading = true
         that.codeText = '发送中...'
         that.axios.post('/v1/email/sendRegister', {
-            type: 'REGISTER',
             email: that.params.email
         }).then(() => {
           that.startTimer()
@@ -172,8 +191,6 @@ export default {
         })
       })
     }
-  },
-  mounted() {
   }
 }
 </script>
@@ -181,14 +198,19 @@ export default {
 <style scoped lang="scss">
 $--color-primary: #D8BE33;
 
+.login-bg {
+  font-size: 150px;
+  font-weight: bold;
+  font-style: italic;
+  color: $--color-primary;
+  text-align: center;
+  padding-top: 250px;
+}
+
 .register-container {
   height: 100%;
   background-size: cover;
-  margin-top: 8%;
-
-  .empty-content {
-    height: 20%;
-  }
+  margin-top: 200px;
 
   ::v-deep(.el-card) {
     background: rgba(30, 36, 50, .7);
@@ -200,6 +222,7 @@ $--color-primary: #D8BE33;
     .register-type {
       font-size: 18px;
       margin: 0 10px;
+      color: #fff;
     }
 
     .el-card__header {

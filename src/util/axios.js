@@ -7,6 +7,8 @@ axios.defaults.timeout = 30000
 
 // 请求拦截器
 axios.interceptors.request.use(function (config) {
+  let userInfo = JSON.parse(localStorage.getItem('userInfo')) || {}
+  config.headers['Authorization'] = userInfo.token
   return config
 }, function (error) {
   return Promise.reject({
