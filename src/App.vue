@@ -35,12 +35,32 @@ body {
   width: 100vw;
 }
 
+//主色
 .primary-color {
   color: $--color-primary !important;
 }
 
+//加载中
 .el-loading-mask {
   background: none !important;
+}
+
+//下拉菜单
+.el-dropdown-menu {
+  background-color: #1d2635 !important;
+
+  .el-dropdown-menu__item {
+    color: #828ea1 !important;
+  }
+
+  .el-dropdown-menu__item--divided:before {
+    background-color: #828ea1 !important;
+    height: 0 !important;
+  }
+  .el-dropdown-menu__item:not(.is-disabled):hover {
+    background: #171a21 !important;
+    color: $--color-primary !important;
+  }
 }
 
 </style>

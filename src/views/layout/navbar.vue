@@ -48,6 +48,30 @@
       v-else
       class="nav-user"
     >
+      <li style="border-left: 1px solid #293448;">
+        <el-dropdown
+          trigger="click"
+          @command="handleCommand"
+        >
+          <span
+            class="el-dropdown-link"
+            style="color: #828ea1;cursor: pointer;display: inline-block;height: 60px;line-height: 60px;width: 80px;"
+          >
+            {{ getLang() }}<i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                v-for="lang in languages"
+                :key="lang"
+                :command="lang"
+              >
+                {{ lang.name }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </li>
       <li>
         <router-link
           to="/register"
@@ -72,10 +96,28 @@
 export default {
   data() {
     return {
-      currentUrl: '/'
+      currentUrl: '/',
+      languages: [{
+        lang: 'zh-CN',
+        name: '中文'
+      }, {
+        lang: 'zh-TW',
+        name: '繁體'
+      }, {
+        lang: 'en-US',
+        name: 'English'
+      }]
     }
   },
   methods: {
+    getLang() {
+      let lang = this.$i18n.locale
+      for (let i = 0; i < this.languages.length; i++) {
+        if (lang === this.languages[i].lang) {
+          return this.languages[i].name
+        }
+      }
+    },
     isActive: function (url) {
       if (url === '/') {
         return this.currentUrl === '/';
@@ -100,7 +142,8 @@ export default {
       if (command === 'logout') {
         this.logout()
       } else {
-        this.$router.push(command)
+        localStorage.setItem('language', command.lang)
+        window.location.reload()
       }
     }
   },
@@ -142,7 +185,6 @@ $--color-primary: #D8BE33;
       line-height: 60px;
       text-align: center;
       float: right;
-      border-left: 1px solid #293448;
 
       a {
         cursor: pointer;
