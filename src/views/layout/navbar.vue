@@ -9,6 +9,35 @@
     </router-link>
     <ul
       class="nav-user"
+    >
+      <li style="border-left: 1px solid #293448;">
+        <el-dropdown
+          trigger="click"
+          @command="handleCommand"
+        >
+          <span
+            class="el-dropdown-link"
+            style="color: #828ea1;cursor: pointer;display: inline-block;height: 60px;line-height: 60px;width: 80px;"
+          >
+            {{ getLang() }}<i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <template #dropdown>
+            <el-dropdown-menu>
+              <el-dropdown-item
+                v-for="lang in languages"
+                :key="lang"
+                :command="lang"
+              >
+                {{ lang.name }}
+              </el-dropdown-item>
+            </el-dropdown-menu>
+          </template>
+        </el-dropdown>
+      </li>
+    </ul>
+    
+    <ul
+      class="nav-user"
       v-if="$store.getters.getUserInfo.uid"
     >
       <li>
@@ -48,30 +77,6 @@
       v-else
       class="nav-user"
     >
-      <li style="border-left: 1px solid #293448;">
-        <el-dropdown
-          trigger="click"
-          @command="handleCommand"
-        >
-          <span
-            class="el-dropdown-link"
-            style="color: #828ea1;cursor: pointer;display: inline-block;height: 60px;line-height: 60px;width: 80px;"
-          >
-            {{ getLang() }}<i class="el-icon-arrow-down el-icon--right" />
-          </span>
-          <template #dropdown>
-            <el-dropdown-menu>
-              <el-dropdown-item
-                v-for="lang in languages"
-                :key="lang"
-                :command="lang"
-              >
-                {{ lang.name }}
-              </el-dropdown-item>
-            </el-dropdown-menu>
-          </template>
-        </el-dropdown>
-      </li>
       <li>
         <router-link
           to="/register"
@@ -177,7 +182,7 @@ $--color-primary: #D8BE33;
   .nav-user {
     float: right;
     list-style: none;
-    margin: 0 15px 0 40px;
+    margin: 0;
     padding: 0;
 
     li {
