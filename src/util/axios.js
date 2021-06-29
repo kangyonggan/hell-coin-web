@@ -9,6 +9,7 @@ axios.defaults.timeout = 30000
 axios.interceptors.request.use(function (config) {
   let userInfo = JSON.parse(localStorage.getItem('userInfo')) || {}
   config.headers['Authorization'] = userInfo.token
+  config.headers['Accept-Language'] = localStorage.getItem('language') || navigator.language
   return config
 }, function (error) {
   return Promise.reject({

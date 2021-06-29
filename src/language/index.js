@@ -4,7 +4,7 @@ import zhTw from './zh-TW.js'
 import enUS from './en-US.js'
 
 const i18n = createI18n({
-  locale: navigator.language,
+  locale: localStorage.getItem('language') || navigator.language,
   messages: {
     'zh-CN': zhCN,
     'zh-TW': zhTw,

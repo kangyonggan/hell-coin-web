@@ -24,7 +24,7 @@
             <a
               class="register-type"
             >
-              用户注册
+              {{ $t("login.registerTitle") }}
             </a>
           </template>
           <el-form
@@ -36,7 +36,7 @@
               prop="email"
             >
               <el-input
-                placeholder="请输入您的邮箱"
+                :placeholder="$i18n.t('login.emailPlacehold')"
                 v-model="params.email"
                 @keyup.enter.native="submit"
                 autocomplete="off"
@@ -51,7 +51,7 @@
               prop="verifyCode"
             >
               <el-input
-                placeholder="请输入邮箱验证码"
+                :placeholder="$i18n.t('login.codePlacehold')"
                 v-model="params.verifyCode"
                 @keyup.enter.native="submit"
                 autocomplete="off"
@@ -73,7 +73,7 @@
               size="medium"
               @click="submit"
             >
-              注 册
+              {{ $t("login.register") }}
             </el-button>
             <div class="bottom-info">
               <el-form-item
@@ -82,13 +82,13 @@
               >
                 <el-checkbox v-model="params.agree" />
               </el-form-item>
-              我同意
+              {{ $t("login.iAgree") }}
               <router-link to="/page/provisions">
-                《会员条款》
+                《{{ $t("login.policy") }}》
               </router-link>
-              和
+              {{ $t("login.agreeAnd") }}
               <router-link to="/page/privacy">
-                《隐私政策》
+                《{{ $t("login.privacy") }}》
               </router-link>
             </div>
           </el-form>
@@ -108,24 +108,24 @@ export default {
         verifyCode: '',
         agree: true
       },
-      codeText: '获取验证码',
+      codeText: this.$i18n.t('login.getCode'),
       second: 60,
       rules: {
         email: [
-          {required: true, message: '邮箱为必填项'}
+          {required: true, message: this.$i18n.t('login.emailText')}
         ],
         agree: [
           {validator: this.validateAgree}
         ],
         verifyCode: [
-          {required: true, message: '验证码为必填项'}
+          {required: true, message: this.$i18n.t('login.codeText')}
         ]
       }
     }
   },
   methods: {
     sendCode() {
-      if (this.second !== 60 || this.loading || this.codeText !== '获取验证码') {
+      if (this.second !== 60 || this.loading || this.codeText !== this.$i18n.t('login.getCode')) {
         return
       }
       let that = this;
@@ -134,14 +134,14 @@ export default {
           return;
         }
         that.loading = true
-        that.codeText = '发送中...'
+        that.codeText = that.$i18n.t('login.sending') + '...'
         that.axios.post('/v1/email/sendRegister', {
             email: that.params.email
         }).then(() => {
           that.startTimer()
-          that.$success('验证码发送成功！')
+          that.$success(that.$i18n.t('login.sendSuccess'))
         }).catch(res => {
-          that.codeText = '获取验证码'
+          that.codeText = that.$i18n.t('login.getCode')
           that.$error(res.msg)
         }).finally(() => {
           that.loading = false
@@ -157,7 +157,7 @@ export default {
         this.second--
         if (this.second === 0) {
           this.second = 60
-          this.codeText = '获取验证码'
+          this.codeText = this.$i18n.t('login.getCode')
           clearInterval(timer)
         }
       }, 1000)
@@ -166,7 +166,7 @@ export default {
       if (value) {
         callback()
       } else {
-        callback(new Error('请先同意隐私条款'))
+        callback(new Error(this.$i18n.t('login.agreeText')))
       }
     },
     submit: function () {
