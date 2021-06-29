@@ -1,9 +1,19 @@
 <template>
-  <div style="text-align: center;margin-top: 220px;font-size: 22px;">
-    资源不存在（404 Not Found）
+  <div class="not-found">
+    {{ $t("common.notFound") }}（404）
   </div>
 </template>
 
 <script>
-    export default {}
+export default {}
 </script>
+
+<style scoped lang="scss">
+$--color-primary: #D8BE33;
+.not-found {
+  text-align: center;
+  margin-top: 250px;
+  font-size: 35px;
+  color: $--color-primary;
+}
+</style>

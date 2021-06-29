@@ -2,14 +2,16 @@ export default {
   navbar: {
     login: '登錄',
     register: '註冊',
-    logout: '註銷',
-    settings: '設置',
+    logout: '註 銷',
+    settings: '設 置',
+    assets: '資 產',
     logoutTip: '此操作將退出登錄, 是否繼續?'
   },
   common: {
     ok: '確定',
     cancel: '取消',
-    tips: '提示'
+    tips: '提示',
+    notFound: '資源不存在'
   },
   login: {
     byPwd: '密碼登錄',

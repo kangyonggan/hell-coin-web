@@ -2,14 +2,16 @@ export default {
   navbar: {
     login: '登录',
     register: '注册',
-    logout: '注销',
-    settings: '设置',
+    logout: '注 销',
+    settings: '设 置',
+    assets: '资 产',
     logoutTip: '此操作将退出登录, 是否继续?'
   },
   common: {
     ok: '确定',
     cancel: '取消',
-    tips: '提示'
+    tips: '提示',
+    notFound: '资源不存在'
   },
   login: {
     byPwd: '密码登录',

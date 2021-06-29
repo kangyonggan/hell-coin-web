@@ -4,12 +4,14 @@ export default {
     register: 'Register',
     logout: 'Logout',
     settings: 'Settings',
+    assets: 'Assets',
     logoutTip: 'This operation will exit login. Do you want to continue?'
   },
   common: {
     ok: 'OK',
     cancel: 'Cancel',
-    tips: 'Tips'
+    tips: 'Tips',
+    notFound: 'Resource doesn\'t exist'
   },
   login: {
     byPwd: 'By Password',

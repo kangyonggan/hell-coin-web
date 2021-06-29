@@ -49,14 +49,29 @@
           <span
             class="el-dropdown-link"
             style="margin-left: 20px;color: #d5d5d5;cursor: pointer;height: 60px;line-height: 60px;display: inline-block"
+            v-if="$store.getters.getUserInfo.nickName.length <= 4"
           >
             {{ $store.getters.getUserInfo.nickName }}
+            <i class="el-icon-arrow-down el-icon--right" />
+          </span>
+          <span
+            class="el-dropdown-link"
+            style="margin-left: 20px;color: #d5d5d5;cursor: pointer;height: 60px;line-height: 60px;display: inline-block"
+            v-else
+          >
+            {{ $store.getters.getUserInfo.nickName.substring(0, 4) }}
             <i class="el-icon-arrow-down el-icon--right" />
           </span>
           <template #dropdown>
             <el-dropdown-menu>
               <el-dropdown-item
-                command="/preference"
+                command="/user/assets"
+                style="line-height: normal"
+              >
+                {{ $t("navbar.assets") }}
+              </el-dropdown-item>
+              <el-dropdown-item
+                command="/user/preference"
                 style="line-height: normal"
               >
                 {{ $t("navbar.settings") }}
@@ -104,10 +119,10 @@ export default {
       currentUrl: '/',
       languages: [{
         lang: 'zh-CN',
-        name: '中文'
+        name: '中 文'
       }, {
         lang: 'zh-TW',
-        name: '繁體'
+        name: '繁 體'
       }, {
         lang: 'en-US',
         name: 'English'
@@ -119,7 +134,7 @@ export default {
       let lang = this.$i18n.locale
       for (let i = 0; i < this.languages.length; i++) {
         if (lang === this.languages[i].lang) {
-          return this.languages[i].name
+          return this.languages[i].name.replace(' ', '')
         }
       }
     },
@@ -146,9 +161,11 @@ export default {
     handleCommand: function (command) {
       if (command === 'logout') {
         this.logout()
-      } else {
+      } else if (command.lang) {
         localStorage.setItem('language', command.lang)
         window.location.reload()
+      } else {
+        this.$router.push(command)
       }
     }
   },

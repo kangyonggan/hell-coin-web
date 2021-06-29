@@ -51,6 +51,7 @@ body {
 
   .el-dropdown-menu__item {
     color: #828ea1 !important;
+    line-height: 30px !important;
   }
 
   .el-dropdown-menu__item--divided:before {

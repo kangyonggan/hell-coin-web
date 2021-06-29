@@ -4,6 +4,7 @@ import NotFound from '../views/404.vue'
 import Index from '../views/index.vue'
 import Login from '../views/login.vue'
 import Register from '../views/register.vue'
+import Assets from '../views/user/assets.vue'
 
 
 const routes = [
@@ -22,6 +23,10 @@ const routes = [
       {
         path: 'register',
         component: Register
+      },
+      {
+        path: 'user/assets',
+        component: Assets
       },
       {
         path: '/:catchAll(.*)',

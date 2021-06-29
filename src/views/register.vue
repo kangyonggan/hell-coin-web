@@ -3,9 +3,7 @@
     <el-col
       :xl="17"
       :lg="16"
-      :md="0"
-      :sm="0"
-      :xs="0"
+      class="hidden-md-and-down"
     >
       <div class="login-bg">
         HELL COIN
